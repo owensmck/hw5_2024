@@ -1,0 +1,205 @@
+/* Animating the logo to fade in and grow. */
+
+@keyframes logo {
+    0% { width: 25px; opacity: 0;}
+    100% { width: 475px; opacity: 1;}
+ }
+
+#logo {
+  animation: 5s logo;
+ }
+
+/* uploading font from google fonts and adding background image with backup color */
+
+body {
+    font-family: "Poppins", serif;
+    background-image: url("../images/concrete_seamless.png"); 
+    background-color: #f1f1f1;
+  }
+
+/*flex display to center the logo and header info, responsive */
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* flex for responsive design for links, with centering and column display */
+.nav_links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+
+/*making "boxes" for context and styling the top edges so theyre round and blue. */
+.card > header{
+background-color: #288088;
+border: solid 2px #45ADAD;
+padding: 20px 0;
+border-top-left-radius:50px;
+border-top-right-radius: 50px;
+}
+
+
+/* the corners are not rounded at the top, so i need to round these edges of the .card class, and not just the header as well*/
+
+
+/* make the links the same color even if they have been visited or are active
+We still have a differnt color for focus and hover though right? I did this to keep active and visited the same but unsure 
+if this is correct because screenshot has blue links. If i get rid of this code below, they are blue and only hover and focus change colors
+but I feel like that is incorrect because then I wont make any changes to the links like it acts*/
+a:visited, a:active {
+  color:initial;
+}
+
+
+/* editing card class to have same width with initial height of 450px*/
+/* Also, the corners are not rounded at the top like they should be, so i need to round these edges of the .card class, 
+and not just the header*/
+
+.card {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  flex-basis: 450px;
+  /*having issues with the second card also having width of 450px, so have to say width 450px
+  in order for it to work. I asked on piazza but was still confused*/
+  width:450px;
+}
+
+
+/* styling the pricing class*/
+
+.pricing {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* styling images in the gallery class*/
+
+.gallery img{
+  border: solid 10px #50C7C7;
+  margin: 10px;
+  width: 300px;
+}
+
+
+/* styling gallery class to use flex*/
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+/* now designing for screens 900px or larger*/
+@media only screen and (min-width: 900px) {
+
+/* logo now moves to left side of screen*/
+header{
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* styling the links to be on right side of header, with space between*/
+.nav_links{
+  flex-direction: row;
+}
+/*ok i know we are supposed to use only flex but this part here took me like an hour and I still could not use
+flex to space them correctly and resorted to padding*/
+.nav_item a{
+  padding:10px;
+}
+
+/* now changing cards to a row display, setting width with flex-basis property to 275px- middle card displays "larger"
+than the others*/
+
+.pricing{
+flex-direction: row;
+}
+
+.card{
+  flex-basis: 275px;
+}
+
+/* having the header stay at the top of the screen while the user continues to scroll*/
+header{
+position:sticky;
+top:0;
+}
+
+/* learning that when i try to only have the "sticky" effect on the main header, it also does all of the headers throughout, so 
+having this line here to make the other headers within the card class stay normal*/
+.card header {
+  position: initial;
+}
+}
+
+
+/* now for when the user prefers reduced motion*/
+
+ @media (prefers-reduced-motion: reduce){
+/* turning off animation when they have this feature turned on*/
+  #logo{
+    animation:none;
+  }
+
+ }
+
+ /* now media querey for print view in portrait view*/
+ @media print and (orientation: portrait){
+  
+  /* changing font and removing background image*/
+  body{
+  font-family: Arial, Helvetica;
+  background-image:none;
+  }
+
+/* fixing nav links to span across entire bar but under the logo*/
+.nav_links{
+display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+nav ul{
+  display:flex;
+  justify-content: space-between;
+}
+
+.nav_item a{
+    /* im still having same problem as before with trying to space my links and I seriously don't know what I am doing wrong, 
+  going to have to use padding again*/
+  padding: 80px;
+}
+
+/* adding new border to cards*/
+  .card{
+    border: 2px solid #45ADDD;
+    flex-basis: 325px;
+  }
+/* making the cards align at the bottom of their section*/
+.pricing{
+  align-items:flex-end;
+  flex-direction: row;
+}
+
+
+/* hiding the gallery class and all of the images within it when being printed*/
+  #gallery, .gallery img{
+    display:none;
+  }
+/* now adding in thumbs up- had to resize image from google of it since it wouldn't let me enter the code in for
+an emoji and would only work if i uploaded a picture*/
+ul li:nth-child(1) + li::after{
+    content: url("../images/thumbs-up.png");
+  }
+}
